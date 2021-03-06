@@ -1,9 +1,12 @@
 package com.example.testathome.models
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity(tableName = "item_db")
 data class Item(
     val address: String,
     val category: String,
@@ -13,5 +16,6 @@ data class Item(
     val mapy: String,
     val roadAddress: String,
     val telephone: String,
+    @PrimaryKey
     val title: String
 ):Serializable

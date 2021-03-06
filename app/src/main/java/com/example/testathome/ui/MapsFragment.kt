@@ -1,40 +1,39 @@
 package com.example.testathome.ui
 
-import android.location.LocationManager
-import androidx.fragment.app.Fragment
-
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.testathome.R
-
+import com.example.testathome.databinding.FragmentMapsBinding
+import com.example.testathome.db.ItemDatabase
+import com.example.testathome.models.Item
+import com.example.testathome.models.SearchResponse
+import com.example.testathome.repository.SearchRepository
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
 
 class MapsFragment : Fragment() {
 
-    lateinit var locationManager:LocationManager
+//    lateinit var locationManager:LocationManager
+    var location = LatLng(126.734086, 127.269311)
+    lateinit var item :Item
+    lateinit var binding: FragmentMapsBinding
 
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-
-
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,15F))
+        googleMap.addMarker(MarkerOptions().position(location).title(item.title))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 18F))
     }
 
     override fun onCreateView(
@@ -42,12 +41,29 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_maps, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        item = arguments?.getSerializable("RestaurnatItem") as Item
+        binding.item=item
+
+        var geocoder = Geocoder(context).getFromLocationName(item.address,1)
+        location = LatLng(geocoder[0].latitude,geocoder[0].longitude)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+
+        binding.saveItemButton.setOnClickListener {
+            val db = ItemDatabase.getDatabase(requireContext())
+            val repository=SearchRepository(db)
+            CoroutineScope(Dispatchers.IO).launch {
+                repository.upsert(item)
+            }
+            findNavController().navigate(R.id.action_mapsFragment_to_savedFragment)
+        }
     }
 }

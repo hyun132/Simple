@@ -1,14 +1,10 @@
 package com.example.testathome.api
 
-import com.example.testathome.Constants.Companion.BASE_URL
-import okhttp3.Interceptor
+import com.example.testathome.utils.Constants.Companion.BASE_URL_FOR_NAVER
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
-import okio.ByteString.Companion.encode
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.URLEncoder
 
 abstract class RetrofitInstance {
 
@@ -34,13 +30,17 @@ abstract class RetrofitInstance {
 
 
             Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(BASE_URL_FOR_NAVER)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()
         }
 
-        val api by lazy {
+        val naverApi by lazy {
+            retrofit.create(SearchApi::class.java)
+        }
+
+        val googleApi by lazy {
             retrofit.create(SearchApi::class.java)
         }
 

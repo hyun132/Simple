@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.testathome.databinding.HomeItemBinding
 import com.example.testathome.models.Item
 
 class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeItemViewHolder>() {
@@ -31,7 +33,7 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         parent: ViewGroup,
         viewType: Int
     ): HomeItemViewHolder {
-        return HomeItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.home_item,parent,false))
+        return HomeItemViewHolder(HomeItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(
@@ -50,10 +52,10 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
     override fun getItemCount(): Int = differ.currentList.size
 
 
-    class HomeItemViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
+    class HomeItemViewHolder(private var binding:HomeItemBinding) :RecyclerView.ViewHolder(binding.root){
         fun bind(item:Item){
-            itemView.findViewById<TextView>(R.id.restaurnat_name_textview).text=item.title
-            itemView.findViewById<TextView>(R.id.roadAddress_textview).text=item.roadAddress
+            binding.item=item
+            binding.executePendingBindings() // binding에 필요한 모든 작업들 즉시 실행하도록 강제하는..?
         }
 
     }
@@ -63,4 +65,5 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
     fun setOnItemClickListener(listener : (Item)->Unit){
         onItemClickListener = listener
     }
+
 }

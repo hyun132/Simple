@@ -2,12 +2,10 @@ package com.example.testathome
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.databinding.HomeItemBinding
 import com.example.testathome.models.Item
@@ -65,5 +63,11 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
     fun setOnItemClickListener(listener : (Item)->Unit){
         onItemClickListener = listener
     }
+
+//    private lateinit var itemTouchHelper:ItemTouchHelper.Callback
+//
+//    fun setItemTouchHelper(callback: ItemTouchHelper.Callback){
+//        itemTouchHelper = callback
+//    }
 
 }

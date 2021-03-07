@@ -21,6 +21,8 @@ import com.example.testathome.SearchViewModel
 import com.example.testathome.databinding.FragmentHomeBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.repository.SearchRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class HomeFragment : Fragment() {
 
@@ -46,6 +48,8 @@ class HomeFragment : Fragment() {
         val adapter = HomeRecyclerviewAdapter()
         adapter.setOnItemClickListener {
             var bundle = Bundle().apply {
+                var item=it
+                item.title=item.title.replace("<b>","").replace("</b>","")
                 putSerializable("RestaurnatItem",it)
             }
             findNavController().navigate(R.id.action_homeFragment_to_mapsFragment,bundle)
@@ -72,13 +76,14 @@ class HomeFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object :androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (!query.isNullOrBlank()) {
-                    viewModel.getSearchItem(query)
-                }
+
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (!newText.isNullOrBlank()) {
+                    viewModel.getSearchItem(newText)
+                }
                 return false
             }
 

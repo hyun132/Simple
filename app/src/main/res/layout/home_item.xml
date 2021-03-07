@@ -29,9 +29,8 @@
             android:layout_marginStart="4dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{item.title}"
             android:textSize="20sp"
-            android:textStyle="bold"
+            app:makeKeywordBold="@{item.title}"
             app:layout_constraintBottom_toBottomOf="@+id/item_imageview"
             app:layout_constraintStart_toEndOf="@+id/item_imageview"
             app:layout_constraintTop_toTopOf="@+id/item_imageview" />

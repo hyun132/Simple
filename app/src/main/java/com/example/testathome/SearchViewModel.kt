@@ -23,7 +23,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
             val response = searchRepository.getSearchResult(query)
             if(response.isSuccessful) {
                 _searchResults.postValue(response.body()?.items)
-                Log.d("inViewModel : ", response.body()?.items?.get(0).toString())
+//                Log.d("inViewModel : ", response.body()?.items?.get(0).toString())
             }
         }
     }

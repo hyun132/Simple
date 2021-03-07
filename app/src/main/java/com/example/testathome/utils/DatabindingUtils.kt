@@ -1,5 +1,7 @@
 package com.example.testathome.utils
 
+import android.text.Html
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.HomeRecyclerviewAdapter
@@ -19,5 +21,11 @@ object DatabindingUtils {
             adapter= recyclerView.adapter as HomeRecyclerviewAdapter
         }
         adapter.differ.submitList(items)
+    }
+
+    @JvmStatic
+    @BindingAdapter("makeKeywordBold")
+    fun boldText(textView: TextView,text:String){
+        textView.setText(Html.fromHtml(text))
     }
 }

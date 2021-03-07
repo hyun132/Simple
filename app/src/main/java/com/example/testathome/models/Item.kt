@@ -17,5 +17,5 @@ data class Item(
     val roadAddress: String,
     val telephone: String,
     @PrimaryKey
-    val title: String
+    var title: String
 ):Serializable

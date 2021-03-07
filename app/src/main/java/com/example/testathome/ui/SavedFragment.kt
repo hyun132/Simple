@@ -96,15 +96,17 @@ class SavedFragment : Fragment() {
         }
 
         binding.randomPickButton.setOnClickListener {
-            var num = viewModel.savedItems.value?.let { it1 -> Random.nextInt(it1.size) }
-            val title =dialog.findViewById<TextView>(R.id.edit)
-            title.apply {
-                text = viewModel.savedItems.value?.get(num!!)?.title.toString()
-                animation = anim
-            }
-            dialog.show()
-            anim.start()
+            viewModel.savedItems.value?.let { it1 ->
+                val num = Random.nextInt(it1.size)
 
+                val title =dialog.findViewById<TextView>(R.id.edit)
+                title.apply {
+                    text = viewModel.savedItems.value?.get(num)?.title.toString()
+                    animation = anim
+                }
+                dialog.show()
+                anim.start()
+            }
         }
 
 

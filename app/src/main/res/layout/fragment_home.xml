@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             app:queryHint="검색어를 입력하세요"
+            android:paddingStart="-16dp"
             app:iconifiedByDefault="false" />
     </androidx.appcompat.widget.Toolbar>
 </com.google.android.material.appbar.AppBarLayout>

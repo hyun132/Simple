@@ -39,8 +39,9 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_item_floationbutton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_add_location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/random_pick_button"
             android:layout_marginBottom="16dp"
@@ -57,8 +58,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="메뉴 고르기"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:textColor="@color/white"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
                 android:gravity="center"
                 android:background="#38DAC1"/>
         </androidx.cardview.widget.CardView>

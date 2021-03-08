@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/savedFragment"
+        android:title="home"
+        android:icon="@drawable/ic_add_location"/>
+    <item
+        android:id="@+id/homeFragment"
+        android:title="home2"
+        android:icon="@drawable/ic_add_location"/>
+<!--    <item-->
+<!--        android:id="@+id/mapsFragment"-->
+<!--        android:title="home3"-->
+<!--        android:icon="@drawable/ic_add_location"/>-->
+
+
+</menu>

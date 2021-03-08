@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -53,7 +54,7 @@ class SavedFragment : Fragment() {
 
         adapter = HomeRecyclerviewAdapter()
 
-        ItemTouchHelper(object :ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT){
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
             override fun onMove(
                 recyclerView: RecyclerView,
@@ -88,7 +89,7 @@ class SavedFragment : Fragment() {
         dialog.setContentView(R.layout.fragment_dialog)
         dialog.window?.setLayout(700, 700)
 
-        val anim = AnimationUtils.loadAnimation(context,R.anim.dialog_text_anim)
+        val anim = AnimationUtils.loadAnimation(context, R.anim.dialog_text_anim)
         val dialogButton = dialog.findViewById<TextView>(R.id.ok_button)
         dialogButton.setOnClickListener {
             dialog.dismiss()
@@ -97,18 +98,21 @@ class SavedFragment : Fragment() {
 
         binding.randomPickButton.setOnClickListener {
             viewModel.savedItems.value?.let { it1 ->
-                val num = Random.nextInt(it1.size)
+                if (it1.size < 1) {
+                    Toast.makeText(requireContext(), "목록을 추가해주세요!", Toast.LENGTH_SHORT).show()
+                } else {
+                    val num = Random.nextInt(it1.size)
 
-                val title =dialog.findViewById<TextView>(R.id.edit)
-                title.apply {
-                    text = viewModel.savedItems.value?.get(num)?.title.toString()
-                    animation = anim
+                    val title = dialog.findViewById<TextView>(R.id.edit)
+                    title.apply {
+                        text = viewModel.savedItems.value?.get(num)?.title.toString()
+                        animation = anim
+                    }
+                    dialog.show()
+                    anim.start()
                 }
-                dialog.show()
-                anim.start()
             }
         }
-
 
 
     }

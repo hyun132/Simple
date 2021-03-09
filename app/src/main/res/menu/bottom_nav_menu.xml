@@ -9,10 +9,10 @@
         android:id="@+id/homeFragment"
         android:title="home2"
         android:icon="@drawable/ic_add_location"/>
-<!--    <item-->
-<!--        android:id="@+id/mapsFragment"-->
-<!--        android:title="home3"-->
-<!--        android:icon="@drawable/ic_add_location"/>-->
+    <item
+        android:id="@+id/thirdFragment"
+        android:title="home3"
+        android:icon="@drawable/ic_add_location"/>
 
 
 </menu>

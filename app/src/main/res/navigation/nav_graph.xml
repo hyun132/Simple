@@ -49,4 +49,9 @@
         android:id="@+id/dialogFragment"
         android:name="com.example.testathome.ui.DialogFragment"
         android:label="DialogFragment" />
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.example.testathome.ui.ThirdFragment"
+        android:label="fragment_third"
+        tools:layout="@layout/fragment_third" />
 </navigation>

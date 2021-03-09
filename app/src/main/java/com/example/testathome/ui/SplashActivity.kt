@@ -7,12 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.testathome.MainActivity
 import com.example.testathome.R
-import java.security.Permission
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {

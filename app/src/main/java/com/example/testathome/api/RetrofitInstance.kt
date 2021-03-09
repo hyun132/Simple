@@ -15,6 +15,7 @@ abstract class RetrofitInstance {
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
             val client = OkHttpClient.Builder().addInterceptor(logging).build()
+
 //            client.apply {
 //                addInterceptor(
 //                    Interceptor { chain ->
@@ -27,8 +28,6 @@ abstract class RetrofitInstance {
 //                )
 //            }
 
-
-
             Retrofit.Builder()
                 .baseUrl(BASE_URL_FOR_NAVER)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -37,10 +36,6 @@ abstract class RetrofitInstance {
         }
 
         val naverApi by lazy {
-            retrofit.create(SearchApi::class.java)
-        }
-
-        val googleApi by lazy {
             retrofit.create(SearchApi::class.java)
         }
 

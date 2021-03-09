@@ -40,13 +40,10 @@ class SplashActivity : AppCompatActivity() {
                     }, 3000)
 
                 }
-                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                    // In an educational UI, explain to the user why your app requires this
-                    // permission for a specific feature to behave as expected. In this UI,
-                    // include a "cancel" or "no thanks" button that allows the user to
-                    // continue using your app without granting the permission.
-                    Toast.makeText(this, "서비스 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
-                }
+//                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+//                    Toast.makeText(this, "서비스 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
+//                    finish()
+//                }
                 else -> {
                     // You can directly ask for the permission.
                     // The registered ActivityResultCallback gets the result of this request.
@@ -99,7 +96,6 @@ class SplashActivity : AppCompatActivity() {
                     finish()
                 }
             }
-
             // Add other 'when' lines to check for other
             // permissions this app might request.
             else -> {
@@ -108,27 +104,5 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-// Register the permissions callback, which handles the user's response to the
-// system permissions dialog. Save the return value, an instance of
-// ActivityResultLauncher. You can use either a val, as shown in this snippet,
-// or a lateinit var in your onAttach() or onCreate() method.
-//    val requestPermissionLauncher =
-//        registerForActivityResult(
-//            ActivityResultContracts.RequestPermission()
-//        ) { isGranted: Boolean ->
-//            if (isGranted) {
-//                // Permission is granted. Continue the action or workflow in your
-//                // app.
-//                    startActivity(Intent(this, MainActivity::class.java))
-//                    finish()
-//            } else {
-//                // Explain to the user that the feature is unavailable because the
-//                // features requires a permission that the user has denied. At the
-//                // same time, respect the user's decision. Don't link to system
-//                // settings in an effort to convince the user to change their
-//                // decision.
-//                Toast.makeText(this,"기능 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
-//            }
-//        }
 
 }

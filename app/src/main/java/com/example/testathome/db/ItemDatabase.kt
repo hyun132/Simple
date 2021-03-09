@@ -11,7 +11,6 @@ abstract class ItemDatabase:RoomDatabase() {
     abstract fun getDao(): Dao
     companion object{
         private var DB_INSTANCE:ItemDatabase?=null
-
         fun getDatabase(context: Context):ItemDatabase{
             val tempInstance = DB_INSTANCE
             if (tempInstance!=null){

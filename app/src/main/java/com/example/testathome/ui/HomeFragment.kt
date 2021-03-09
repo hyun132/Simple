@@ -56,13 +56,6 @@ class HomeFragment : Fragment() {
             Toast.makeText(context,"${it.title} clicked",Toast.LENGTH_SHORT).show()
         }
 
-//        adapter.setOnItemButtonClickListener {
-//            viewModel.saveItem(it)
-//            findNavController().popBackStack()
-//        }
-
-
-
         binding.homeRecyclerview.adapter =adapter
         binding.viewModel=viewModel
 

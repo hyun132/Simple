@@ -64,10 +64,4 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         onItemClickListener = listener
     }
 
-//    private lateinit var itemTouchHelper:ItemTouchHelper.Callback
-//
-//    fun setItemTouchHelper(callback: ItemTouchHelper.Callback){
-//        itemTouchHelper = callback
-//    }
-
 }

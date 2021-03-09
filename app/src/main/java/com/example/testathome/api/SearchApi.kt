@@ -11,21 +11,10 @@ interface SearchApi {
     @GET("search/local.json")
     suspend fun searchRestaurant(
         @Query("query") query:String,
-        @Query("display") display:Int =10,
+        @Query("display") display:Int =5,
         @Header("X-Naver-Client-Id") clientId:String ="0TaUOlc0yhPji0ZcSzvt",
         @Header("X-Naver-Client-Secret") clientSecret: String ="yH4tQyQWmD"
     ): Response<SearchResponse>
-
-//
-//        @GET("search/local.json")
-//    suspend fun searchRestaurant(
-//        @Query("key") key:String,
-//        @Query("input") display:Int =10,
-//        @Query("inputtype") clientId:String ="0TaUOlc0yhPji0ZcSzvt",
-//        @Query("fields") clientSecret: String ="yH4tQyQWmD",
-//        @Query("locationbias") clientSecret: String ="yH4tQyQWmD"
-//    ): Response<SearchResponse>
-//
 
 
 }

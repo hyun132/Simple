@@ -18,8 +18,6 @@ import kotlinx.coroutines.CoroutineScope
 
 class MainActivity : AppCompatActivity() {
 
-//    lateinit var viewModel : SearchViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(

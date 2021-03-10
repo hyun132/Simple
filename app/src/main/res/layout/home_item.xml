@@ -30,7 +30,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="20sp"
-            app:makeKeywordBold="@{item.title}"
+            app:makeKeywordBold="@{item.place_name}"
             app:layout_constraintBottom_toBottomOf="@+id/item_imageview"
             app:layout_constraintStart_toEndOf="@+id/item_imageview"
             app:layout_constraintTop_toTopOf="@+id/item_imageview" />
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{item.roadAddress}"
+            android:text="@{item.road_address_name}"
             app:layout_constraintStart_toEndOf="@+id/item_imageview"
             app:layout_constraintTop_toBottomOf="@+id/restaurnat_name_textview" />
 

@@ -8,14 +8,17 @@ import java.io.Serializable
 
 @Entity(tableName = "item_db")
 data class Item(
-    val address: String,
-    val category: String,
-    val description: String,
-    val link: String,
-    val mapx: String,
-    val mapy: String,
-    val roadAddress: String,
-    val telephone: String,
+    val address_name: String,
+    val category_group_code: String,
+    val category_group_name: String,
+    val category_name: String,
+    val distance: String,
     @PrimaryKey
-    var title: String
+    val id: String,
+    val phone: String,
+    val place_name: String,
+    val place_url: String,
+    val road_address_name: String,
+    val x: String,
+    val y: String
 ):Serializable

@@ -1,4 +1,4 @@
-package com.example.testathome
+package com.example.testathome.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -22,8 +22,7 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
         CoroutineScope(Dispatchers.IO).launch {
             val response = searchRepository.getSearchResult(query)
             if(response.isSuccessful) {
-                _searchResults.postValue(response.body()?.items)
-//                Log.d("inViewModel : ", response.body()?.items?.get(0).toString())
+                _searchResults.postValue(response.body()?.documents)
             }
         }
     }

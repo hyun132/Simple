@@ -1,40 +1,39 @@
-package com.example.testathome.ui
+package com.example.testathome.ui.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.SearchView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
-import com.example.testathome.SearchViewModel
-import com.example.testathome.databinding.FragmentHomeBinding
+import com.example.testathome.databinding.FragmentSearchBinding
 import com.example.testathome.db.ItemDatabase
+import com.example.testathome.models.Item
 import com.example.testathome.repository.SearchRepository
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import com.example.testathome.ui.SearchViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class HomeFragment : Fragment() {
+class SearchFragment : BottomSheetDialogFragment() {
 
     lateinit var viewModel : SearchViewModel
-    lateinit var binding:FragmentHomeBinding
+    lateinit var binding:FragmentSearchBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL,R.style.CustomBottomSheetDialogTheme)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_search, container, false)
         return binding.root
     }
 
@@ -43,17 +42,15 @@ class HomeFragment : Fragment() {
 
         val db = ItemDatabase.getDatabase(requireContext())
         val repository=SearchRepository(db)
-        viewModel=SearchViewModel(repository)
+        viewModel= SearchViewModel(repository)
 
         val adapter = HomeRecyclerviewAdapter()
         adapter.setOnItemClickListener {
-            var bundle = Bundle().apply {
-                var item=it
-                item.title=item.title.replace("<b>","").replace("</b>","")
-                putSerializable("RestaurnatItem",it)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_mapsFragment,bundle)
-            Toast.makeText(context,"${it.title} clicked",Toast.LENGTH_SHORT).show()
+            showDialog(it)
+//            var bundle = Bundle().apply {
+//                putSerializable("RestaurnatItem",it)
+//            }
+            findNavController().navigate(R.id.action_homeFragment_to_mapsFragment)
         }
 
         binding.homeRecyclerview.adapter =adapter
@@ -82,6 +79,21 @@ class HomeFragment : Fragment() {
 
         })
 
+    }
+    fun showDialog(item:Item){
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage(item.place_name +"을 추가하시겠습니까?")
+            .setPositiveButton("확인",
+                DialogInterface.OnClickListener { dialog, id ->
+                    viewModel.saveItem(item)
+                    viewModel.savedItems
+                })
+            .setNegativeButton("취소",
+                DialogInterface.OnClickListener { dialog, id ->
+                    dialog.dismiss()
+                })
+        // Create the AlertDialog object and return it
+        builder.create().show()
     }
 
 }

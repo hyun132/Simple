@@ -1,4 +1,4 @@
-package com.example.testathome.ui
+package com.example.testathome.ui.mylist
 
 import android.app.Dialog
 import android.os.Bundle
@@ -17,12 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
-import com.example.testathome.SearchViewModel
 import com.example.testathome.databinding.FragmentSavedBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.repository.SearchRepository
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import com.example.testathome.ui.SearchViewModel
 import kotlin.random.Random
 
 class SavedFragment : Fragment() {
@@ -101,7 +99,7 @@ class SavedFragment : Fragment() {
 
                     val title = dialog.findViewById<TextView>(R.id.edit)
                     title.apply {
-                        text = viewModel.savedItems.value?.get(num)?.title.toString()
+                        text = viewModel.savedItems.value?.get(num)?.place_name.toString()
                         animation = anim
                     }
                     dialog.show()
@@ -109,8 +107,6 @@ class SavedFragment : Fragment() {
                 }
             }
         }
-
-
     }
 }
 

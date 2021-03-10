@@ -11,9 +11,6 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_homeFragment_to_mapsFragment"
-            app:destination="@id/maps" />
-        <action
             android:id="@+id/action_homeFragment_to_savedFragment"
             app:destination="@id/saved" />
     </fragment>
@@ -23,10 +20,8 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps">
         <action
-            android:id="@+id/action_mapsFragment_to_homeFragment"
-            app:destination="@id/search"
-            app:popUpTo="@id/saved"
-            app:popUpToInclusive="true"/>
+            android:id="@+id/action_mapsFragment_to_searchFragment"
+            app:destination="@id/search" />
         <argument
             android:name="RestaurnatItem"
             app:argType="com.example.testathome.models.Item" />

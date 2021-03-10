@@ -18,9 +18,9 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
 
 
 
-    fun getSearchItem(query: String){
+    fun getSearchItem(query: String,x:Double,y:Double){
         CoroutineScope(Dispatchers.IO).launch {
-            val response = searchRepository.getSearchResult(query)
+            val response = searchRepository.getSearchResult(query = query,x = x,y=y)
             if(response.isSuccessful) {
                 _searchResults.postValue(response.body()?.documents)
             }

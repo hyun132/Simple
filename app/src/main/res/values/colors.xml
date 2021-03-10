@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="main_red1">#FF5656</color>
+    <color name="main_pink1">#FF8282</color>
+    <color name="main_gray">#D3D3D3</color>
+    <color name="main_pink2">#ff7995</color>
+    <color name="main_pink3">#ff9a93</color>
+    <color name="main_pink4">#feb4c3</color>
+    <color name="main_purple1">#d47deb</color>
+    <color name="main_purple2">#a08bd1</color>
+    <color name="main_purple3">#cea7de</color>
+    <color name="main_purple4">#feb4c3</color>
 </resources>

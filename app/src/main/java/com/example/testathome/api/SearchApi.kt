@@ -16,8 +16,8 @@ interface SearchApi {
         @Query("query") query:String,
         @Query("page") display:Int =1,
         @Query("size") size:Int =15,
-        @Query("y") x:Double=127.269311,
-        @Query("x") y:Double=126.734086,
+        @Query("y") y:Double,
+        @Query("x") x:Double,
         @Query("radius") radius:Int =1000,
     ): Response<KakaoSearchResponse>
 

@@ -9,7 +9,7 @@ class SearchRepository(db:ItemDatabase) {
 
     val dao = db.getDao()
 
-    suspend fun getSearchResult(query:String) = RetrofitInstance.api.searchRestaurant(query)
+    suspend fun getSearchResult(query:String,x:Double,y:Double) = RetrofitInstance.api.searchRestaurant(query=query,x=x,y=y)
 
     suspend fun upsert(item:Item){
         dao.upsert(item)

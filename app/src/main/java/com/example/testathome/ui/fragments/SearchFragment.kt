@@ -1,4 +1,4 @@
-package com.example.testathome.ui
+package com.example.testathome.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,25 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
-import com.example.testathome.SearchViewModel
 import com.example.testathome.databinding.FragmentHomeBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.repository.SearchRepository
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import com.example.testathome.ui.SearchViewModel
 
-class HomeFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     lateinit var viewModel : SearchViewModel
     lateinit var binding:FragmentHomeBinding
@@ -43,7 +36,7 @@ class HomeFragment : Fragment() {
 
         val db = ItemDatabase.getDatabase(requireContext())
         val repository=SearchRepository(db)
-        viewModel=SearchViewModel(repository)
+        viewModel= SearchViewModel(repository)
 
         val adapter = HomeRecyclerviewAdapter()
         adapter.setOnItemClickListener {

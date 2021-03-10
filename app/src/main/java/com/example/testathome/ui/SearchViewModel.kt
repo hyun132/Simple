@@ -1,4 +1,4 @@
-package com.example.testathome
+package com.example.testathome.ui
 
 import android.util.Log
 import androidx.lifecycle.LiveData

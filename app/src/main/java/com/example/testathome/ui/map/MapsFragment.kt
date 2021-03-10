@@ -1,4 +1,4 @@
-package com.example.testathome.ui
+package com.example.testathome.ui.map
 
 import android.location.Geocoder
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.example.testathome.R
 import com.example.testathome.databinding.FragmentMapsBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.models.Item
-import com.example.testathome.models.SearchResponse
 import com.example.testathome.repository.SearchRepository
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback

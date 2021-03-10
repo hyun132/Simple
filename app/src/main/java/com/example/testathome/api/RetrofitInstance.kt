@@ -1,10 +1,14 @@
 package com.example.testathome.api
 
 import com.example.testathome.utils.Constants.Companion.BASE_URL_FOR_NAVER
+import com.example.testathome.utils.Constants.Companion.CLIENT_ID
+import com.example.testathome.utils.Constants.Companion.CLIENT_SECRET
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.URLEncoder
 
 abstract class RetrofitInstance {
 
@@ -14,19 +18,17 @@ abstract class RetrofitInstance {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-            val client = OkHttpClient.Builder().addInterceptor(logging).build()
+            val interceptor =Interceptor { chain ->
+                        val request = chain.request().newBuilder()
+                            .addHeader("X-Naver-Client-Id", CLIENT_ID)
+                            .addHeader("X-Naver-Client-Secret", CLIENT_SECRET).build()
+                        return@Interceptor chain.proceed(request)
+                    }
 
-//            client.apply {
-//                addInterceptor(
-//                    Interceptor { chain ->
-//                        val request = chain.request().newBuilder()
-//                            .addHeader("X-Naver-Client-Id",URLEncoder.encode("0TaUOlc0yhPji0ZcSzvt","UTF-8") )
-//                            .addHeader("X-Naver-Client-Secret", URLEncoder.encode("B21IhitoqT","UTF-8"))
-//                        return@Interceptor chain.proceed(request.build())
-//
-//                    }
-//                )
-//            }
+            val client = OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .addInterceptor(interceptor)
+                .build()
 
             Retrofit.Builder()
                 .baseUrl(BASE_URL_FOR_NAVER)

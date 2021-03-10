@@ -1,4 +1,4 @@
-package com.example.testathome.ui
+package com.example.testathome.ui.mylist
 
 import android.app.Dialog
 import android.os.Bundle
@@ -17,12 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
-import com.example.testathome.SearchViewModel
 import com.example.testathome.databinding.FragmentSavedBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.repository.SearchRepository
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import com.example.testathome.ui.SearchViewModel
 import kotlin.random.Random
 
 class SavedFragment : Fragment() {

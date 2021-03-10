@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.testathome.SearchViewModel" />
+            type="com.example.testathome.ui.SearchViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomeFragment">
+        tools:context=".ui.fragments.SearchFragment">
 
 <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/appbar"

@@ -12,8 +12,6 @@ interface SearchApi {
     suspend fun searchRestaurant(
         @Query("query") query:String,
         @Query("display") display:Int =5,
-        @Header("X-Naver-Client-Id") clientId:String ="0TaUOlc0yhPji0ZcSzvt",
-        @Header("X-Naver-Client-Secret") clientSecret: String ="yH4tQyQWmD"
     ): Response<SearchResponse>
 
 

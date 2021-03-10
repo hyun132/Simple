@@ -8,7 +8,7 @@ class Constants {
         const val BASE_URL_FOR_NAVER = "https://openapi.naver.com/v1/"
         const val BASE_URL_FOR_GOOGLE = "https://maps.googleapis.com/maps/api/place/"
 
-        //        const val CLIENT_ID="0TaUOlc0yhPji0ZcSzvt"
-//        const val CLIENT_SECRET="yH4tQyQWmD"
+        const val CLIENT_ID="0TaUOlc0yhPji0ZcSzvt"
+        const val CLIENT_SECRET="yH4tQyQWmD"
     }
 }

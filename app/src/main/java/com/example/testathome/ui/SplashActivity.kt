@@ -7,13 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.example.testathome.MainActivity
+import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.Glide
 import com.example.testathome.R
-import java.security.Permission
-import java.util.*
+import com.example.testathome.databinding.ActivityMainBinding
+import com.example.testathome.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
 
@@ -26,9 +26,23 @@ class SplashActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        val binding: ActivitySplashBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_splash
+        )
+
+        //나중에 binding adapter 만들어서 수정.
+        Glide
+            .with(this)
+            .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLexsPDObKgYHqB9WXERp2kMYs7rYEflmrQ&usqp=CAU")
+            .centerCrop()
+            .placeholder(R.drawable.ic_image_notloaded)
+            .into(binding.ivLogo);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             when {

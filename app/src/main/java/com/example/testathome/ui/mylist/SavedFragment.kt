@@ -99,7 +99,7 @@ class SavedFragment : Fragment() {
 
                     val title = dialog.findViewById<TextView>(R.id.edit)
                     title.apply {
-                        text = viewModel.savedItems.value?.get(num)?.title.toString()
+                        text = viewModel.savedItems.value?.get(num)?.place_name.toString()
                         animation = anim
                     }
                     dialog.show()
@@ -107,8 +107,6 @@ class SavedFragment : Fragment() {
                 }
             }
         }
-
-
     }
 }
 

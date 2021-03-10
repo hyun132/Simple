@@ -15,7 +15,7 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
     private val differCallback = object : DiffUtil.ItemCallback<Item>() {
         //둘이 같은 객체인지
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-            return oldItem.address == newItem.address
+            return oldItem.id== newItem.id
         }
 
         //둘이 같은 아이템인지
@@ -42,7 +42,7 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { it(item) }
         }
-        Log.d("inonBindViewHolder: ",item.title)
+        Log.d("inonBindViewHolder: ",item.place_name)
         holder.bind(item)
 
     }

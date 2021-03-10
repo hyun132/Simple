@@ -41,12 +41,12 @@ class SearchFragment : Fragment() {
         val adapter = HomeRecyclerviewAdapter()
         adapter.setOnItemClickListener {
             var bundle = Bundle().apply {
-                var item=it
-                item.title=item.title.replace("<b>","").replace("</b>","")
+//                var item=it
+//                item.title=item.title.replace("<b>","").replace("</b>","")
                 putSerializable("RestaurnatItem",it)
             }
             findNavController().navigate(R.id.action_homeFragment_to_mapsFragment,bundle)
-            Toast.makeText(context,"${it.title} clicked",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"${it.place_name} clicked",Toast.LENGTH_SHORT).show()
         }
 
         binding.homeRecyclerview.adapter =adapter

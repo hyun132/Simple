@@ -12,29 +12,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         tools:context=".ui.fragments.SearchFragment">
 
-<com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/appbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent">
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            app:queryHint="검색어를 입력하세요"
-            android:paddingStart="-16dp"
-            app:iconifiedByDefault="false" />
-    </androidx.appcompat.widget.Toolbar>
-</com.google.android.material.appbar.AppBarLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingStart="-24dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="검색어를 입력하세요" />
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homeRecyclerview"
@@ -43,7 +41,7 @@
             android:layout_marginTop="8dp"
             app:listItem="@{viewModel.searchResult}"
             app:layout_constraintVertical_weight="1"
-            app:layout_constraintTop_toBottomOf="@+id/appbar"
+            app:layout_constraintTop_toBottomOf="@+id/search_toolbar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

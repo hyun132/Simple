@@ -1,4 +1,4 @@
-package com.example.testathome.ui
+package com.example.testathome.ui.map
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -10,7 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
+class MapsViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
     private val _searchResults: MutableLiveData<List<Item>> = MutableLiveData()
     val searchResult: LiveData<List<Item>>

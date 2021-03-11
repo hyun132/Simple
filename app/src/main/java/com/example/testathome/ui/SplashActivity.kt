@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
+import android.provider.Settings
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -16,10 +18,12 @@ import com.bumptech.glide.Glide
 import com.example.testathome.R
 import com.example.testathome.databinding.ActivityMainBinding
 import com.example.testathome.databinding.ActivitySplashBinding
+import com.google.android.material.snackbar.Snackbar
 
 class SplashActivity : AppCompatActivity() {
 
     val PERMISSION_REQUEST_CODE = 1001
+    var NEVER_ASK_AGAIN=false
 
     private val permissions = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -27,8 +31,6 @@ class SplashActivity : AppCompatActivity() {
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,33 +40,30 @@ class SplashActivity : AppCompatActivity() {
             this, R.layout.activity_splash
         )
 
-//
-//        //나중에 binding adapter 만들어서 수정.
-//        Glide
-//            .with(this)
-//            .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSLexsPDObKgYHqB9WXERp2kMYs7rYEflmrQ&usqp=CAU")
-//            .centerCrop()
-//            .placeholder(R.drawable.ic_image_notloaded)
-//            .into(binding.ivLogo);
-
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             when {
                 checkAllPermissionsGranted(permissions) -> {
                     // You can use the API that requires the permission.
-                    Handler().postDelayed({
+                    Handler(Looper.myLooper()!!).postDelayed({  //Handler 생성 중에 암시 적으로 Looper를 선택하면 작업이 자동으로 손실 (Handler가 새 작업을 예상하지 않고 종료되는 경우)
+                        // , 충돌 (Looper가 활성화되지 않은 스레드에서 처리기가 생성되는 경우) 또는 경쟁 조건이 발생하는 버그가 발생할 수 있습니다.
                         startActivity(Intent(this, MainActivity::class.java))
                         finish()
                     }, 3000)
 
                 }
 //                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-//                    Toast.makeText(this, "서비스 사용을 위한 권한 동의가 필요합니다.", Toast.LENGTH_SHORT).show()
 //                    finish()
 //                }
+
                 else -> {
+//                    if (!NEVER_ASK_AGAIN){
+//                        onRequestPermissionsResult(PERMISSION_REQUEST_CODE,permissions, intArrayOf(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+//                            ,checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)))
+//                    }
+
                     // You can directly ask for the permission.
                     // The registered ActivityResultCallback gets the result of this request.
-                    Handler().postDelayed({
+                    Handler(Looper.myLooper()!!).postDelayed({
                         ActivityCompat.requestPermissions(
                             this,
                             arrayOf(

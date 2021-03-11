@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/search"
-        android:name="com.example.testathome.ui.fragments.SearchFragment"
+        android:name="com.example.testathome.ui.savedlist.search.SearchFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_search" >
         <action
@@ -33,10 +33,10 @@
     </fragment>
     <fragment
         android:id="@+id/saved"
-        android:name="com.example.testathome.ui.mylist.SavedFragment"
+        android:name="com.example.testathome.ui.savedlist.SavedFragment"
         android:label="SavedFragment" >
         <action
-            android:id="@+id/action_savedFragment_to_homeFragment"
+            android:id="@+id/action_saved_to_search"
             app:destination="@id/search" />
     </fragment>
     <fragment

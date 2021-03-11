@@ -1,4 +1,4 @@
-package com.example.testathome.ui.fragments
+package com.example.testathome.ui.savedlist.search
 
 import android.content.DialogInterface
 import android.graphics.Color
@@ -7,13 +7,9 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
@@ -21,7 +17,6 @@ import com.example.testathome.databinding.FragmentSearchBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.models.Item
 import com.example.testathome.repository.SearchRepository
-import com.example.testathome.ui.SearchViewModel
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -101,8 +96,8 @@ class SearchFragment(currentLocation: Location) : BottomSheetDialogFragment() {
         }
 
         val view = view
-        view!!.post{
-            val parent = view!!.parent as View
+        view.post{
+            val parent = view.parent as View
             val params = parent.layoutParams as CoordinatorLayout.LayoutParams
             val behavior = params.behavior
             val bottomSheetBehavior = behavior as BottomSheetBehavior<*>?
@@ -119,7 +114,6 @@ class SearchFragment(currentLocation: Location) : BottomSheetDialogFragment() {
             .setPositiveButton("확인",
                 DialogInterface.OnClickListener { dialog, id ->
                     viewModel.saveItem(item)
-                    viewModel.savedItems
                     dialog.dismiss()
                     this.dismiss()
                 })

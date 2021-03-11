@@ -2,8 +2,6 @@ package com.example.testathome.ui.map
 
 import android.annotation.SuppressLint
 import android.content.Context.LOCATION_SERVICE
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
@@ -13,11 +11,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.testathome.R
 import com.example.testathome.databinding.FragmentMapsBinding
 import com.example.testathome.models.Item
-import com.example.testathome.ui.fragments.SearchFragment
+import com.example.testathome.ui.savedlist.search.SearchFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -53,11 +50,6 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationClickListener,
         mapFragment?.getMapAsync(callback)
 
         binding.saveItemButton.setOnClickListener {
-
-            val bundle=Bundle().apply {
-                putDoubleArray("currentLocation", doubleArrayOf(currentLocation.latitude,currentLocation.longitude))
-            }
-//            findNavController().navigate(R.id.action_mapsFragment_to_searchFragment,bundle)
             val dialogFragment = SearchFragment(currentLocation)
             dialogFragment.show(childFragmentManager,"fragment_search")
         }
@@ -107,7 +99,7 @@ class MapsFragment : Fragment(), GoogleMap.OnMyLocationClickListener,
 
     override fun onResume() {
         super.onResume()
-
+        getCurrentLocation()
     }
 
 

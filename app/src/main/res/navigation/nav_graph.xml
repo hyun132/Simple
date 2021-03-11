@@ -43,5 +43,14 @@
         android:id="@+id/setting"
         android:name="com.example.testathome.ui.setting.SettingFragment"
         android:label="fragment_thrid"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+        <action
+            android:id="@+id/action_setting_to_openLicenseFragment"
+            app:destination="@id/openLicenseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openLicenseFragment"
+        android:name="com.example.testathome.ui.setting.OpenLicenseFragment"
+        android:label="fragment_open_license"
+        tools:layout="@layout/fragment_open_license" />
 </navigation>

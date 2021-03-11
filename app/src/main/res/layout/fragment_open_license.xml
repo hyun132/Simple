@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.setting.SettingFragment">
+    tools:context=".ui.setting.OpenLicenseFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/gotolicense"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lisence_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="환경설정" />
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

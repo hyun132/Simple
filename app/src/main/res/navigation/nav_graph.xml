@@ -34,11 +34,7 @@
     <fragment
         android:id="@+id/saved"
         android:name="com.example.testathome.ui.savedlist.SavedFragment"
-        android:label="SavedFragment" >
-        <action
-            android:id="@+id/action_saved_to_search"
-            app:destination="@id/search" />
-    </fragment>
+        android:label="SavedFragment" />
     <fragment
         android:id="@+id/setting"
         android:name="com.example.testathome.ui.setting.SettingFragment"
@@ -52,5 +48,10 @@
         android:id="@+id/openLicenseFragment"
         android:name="com.example.testathome.ui.setting.OpenLicenseFragment"
         android:label="fragment_open_license"
-        tools:layout="@layout/fragment_open_license" />
+        tools:layout="@layout/fragment_open_license" >
+        <action
+            android:id="@+id/action_openLicenseFragment_to_setting"
+            app:destination="@id/setting"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

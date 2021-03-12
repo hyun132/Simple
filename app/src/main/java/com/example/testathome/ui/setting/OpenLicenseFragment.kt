@@ -4,11 +4,15 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testathome.R
+import com.example.testathome.databinding.FragmentOpenLicenseBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -16,41 +20,36 @@ import java.io.InputStream
 
 class OpenLicenseFragment : Fragment() {
 
-    val fileNames = arrayOf(R.raw.lottie,R.raw.okhttp,R.raw.okhttp)
-    val contents = arrayListOf<String>()
-    @SuppressLint("SdCardPath")
-    val filePath="/data/data/com.example.testathome/files/"
+    val fileNames = arrayOf(R.raw.lottie,R.raw.okhttp,R.raw.retrofit)
+    val contents = arrayListOf<LicenseData>()
+    lateinit var binding:FragmentOpenLicenseBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//
+
         for(filename in fileNames){
-            readTxtfile(requireContext(),filename)
+            readTxtfile(requireContext(),filename)?.let { contents.add(it) }
         }
-
-        for (str in contents){
-            println(str)
-        }
-
     }
-    fun readFileAsLinesUsingBufferedReader(resId: Int): List<String>
-            = File(requireContext().getResources().openRawResource(resId).toString()).bufferedReader().readLines()
 
-    fun readTxtfile(context: Context, resId: Int): String? {
+    fun readTxtfile(context: Context, resId: Int): LicenseData? {
         var result = ""
+        var filename =""
         val txtResource: InputStream = context.getResources().openRawResource(resId)
         val byteArrayOutputStream = ByteArrayOutputStream()
         var i: Int
-        try { i = txtResource.read()
+        try { i = txtResource.read()  //파일 끝나면 -1을 리턴함.
             while (i != -1) {
                 byteArrayOutputStream.write(i)
                 i = txtResource.read()
             }
-            contents.add(String(byteArrayOutputStream.toByteArray()))
+            result = String(byteArrayOutputStream.toByteArray()).trim(' ')
+            filename= requireContext().resources.getResourceName(resId).split('/')[1]
             txtResource.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        return result.trim { it <= ' ' }
+        return LicenseData(filename,result)
     }
 
     override fun onCreateView(
@@ -58,11 +57,27 @@ class OpenLicenseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_open_license, container, false)
+        binding = DataBindingUtil.inflate(layoutInflater,R.layout.fragment_open_license, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity as AppCompatActivity).supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+            title="오픈소스 라이선스"
+        }
+
+        binding.lisenceRecyclerview.apply {
+            adapter = LicenseAdapter(contents)
+            layoutManager=LinearLayoutManager(requireContext())
+        }
     }
+
+    data class LicenseData(
+        val title:String,
+        val contents:String
+    )
 }

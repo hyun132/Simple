@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -28,7 +29,7 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var button = view.findViewById<TextView>(R.id.gotolicense)
+        val button = view.findViewById<RelativeLayout>(R.id.btn_goto_license)
         button.setOnClickListener {
             findNavController().navigate(R.id.action_setting_to_openLicenseFragment)
         }

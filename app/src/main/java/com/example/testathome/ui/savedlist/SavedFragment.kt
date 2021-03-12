@@ -12,6 +12,10 @@ import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,15 +24,16 @@ import com.example.testathome.R
 import com.example.testathome.databinding.FragmentSavedBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.repository.SearchRepository
+import com.example.testathome.ui.savedlist.search.SearchViewModel
 import kotlin.random.Random
 
 class SavedFragment : Fragment() {
 
-    lateinit var viewModel: SavedViewModel
     lateinit var binding: FragmentSavedBinding
     lateinit var adapter: HomeRecyclerviewAdapter
     lateinit var dialog: Dialog
     lateinit var anim:Animation
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,31 +41,33 @@ class SavedFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved, container, false)
 
-        val db = ItemDatabase.getDatabase(requireContext())
-        val repository = SearchRepository(db)
-        viewModel = SavedViewModel(repository)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val db = ItemDatabase.getDatabase(requireContext())
+        val repository=SearchRepository(db)
+        val viewModel: SavedViewModel by viewModels {
+            object : ViewModelProvider.Factory {
+                override fun <T : ViewModel?> create(modelClass: Class<T>): T =
+                    SavedViewModel(repository) as T
+            }
+        }
+        binding.viewModel = viewModel
         adapter = HomeRecyclerviewAdapter()
 
-        binding.viewModel = viewModel
-
-        initRecyclerview()
-
-        viewModel.savedItems.observe(viewLifecycleOwner) {
-            Log.d("main: ", "data changed!")
-            adapter.differ.submitList(it)
-        }
-
+        initRecyclerview(viewModel)
         searchDialogSetting()
 
+        viewModel.getSavedItems().observe(viewLifecycleOwner, {
+            Log.d("main: ", "data changed!")
+            Log.d("main: ", it[0].toString())
+            adapter.differ.submitList(it)
+        })
+
         binding.randomPickButton.setOnClickListener {
-            viewModel.savedItems.value?.let { it1 ->
+            viewModel.getSavedItems().value?.let { it1 ->
                 if (it1.size < 1) {
                     Toast.makeText(requireContext(), "목록을 추가해주세요!", Toast.LENGTH_SHORT).show()
                 } else {
@@ -68,7 +75,7 @@ class SavedFragment : Fragment() {
 
                     val title = dialog.findViewById<TextView>(R.id.edit)
                     title.apply {
-                        text = viewModel.savedItems.value?.get(num)?.place_name.toString()
+                        text = it1.get(num).place_name
                         animation = anim
                     }
                     dialog.show()
@@ -78,7 +85,12 @@ class SavedFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerview() {
+    private fun initRecyclerview(viewModel: SavedViewModel) {
+
+        binding.savedRecyclerview.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
             override fun onMove(
@@ -96,18 +108,16 @@ class SavedFragment : Fragment() {
 
         }).attachToRecyclerView(binding.savedRecyclerview)
 
-        binding.savedRecyclerview.adapter = adapter
-        binding.savedRecyclerview.layoutManager = LinearLayoutManager(requireContext())
-
-//        binding.addItemFloationbutton.setOnClickListener {
-//            findNavController().navigate(R.id.action_saved_to_search)
-//        }
     }
 
     private fun searchDialogSetting() {
         dialog = Dialog(requireContext())
-        dialog.setContentView(R.layout.fragment_dialog)
-        dialog.window?.setLayout(700, 700)
+//        dialog.setContentView(R.layout.fragment_dialog)
+//        dialog.window?.setLayout(700, 700)
+        dialog.apply {
+            setContentView(R.layout.fragment_dialog)
+            window?.setLayout(700, 700)
+        }
 
         anim = AnimationUtils.loadAnimation(context, R.anim.dialog_text_anim)
         val dialogButton = dialog.findViewById<TextView>(R.id.ok_button)
@@ -119,7 +129,7 @@ class SavedFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.savedItems
+//        viewModel.savedItems
     }
 }
 

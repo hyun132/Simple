@@ -12,33 +12,4 @@ import kotlinx.coroutines.launch
 
 class MapsViewModel(private val searchRepository: SearchRepository) : ViewModel() {
 
-    private val _searchResults: MutableLiveData<List<Item>> = MutableLiveData()
-    val searchResult: LiveData<List<Item>>
-        get() = _searchResults
-
-
-
-    fun getSearchItem(query: String,x:Double,y:Double){
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = searchRepository.getSearchResult(query = query,x = x,y=y)
-            if(response.isSuccessful) {
-                _searchResults.postValue(response.body()?.documents)
-            }
-        }
-    }
-
-    fun saveItem(item: Item){
-        CoroutineScope(Dispatchers.IO).launch {
-            searchRepository.upsert(item)
-        }
-    }
-
-    fun deleteItem(item: Item){
-        CoroutineScope(Dispatchers.IO).launch {
-            searchRepository.delete(item)
-        }
-    }
-
-    var savedItems = searchRepository.getSavedItemList
-
 }

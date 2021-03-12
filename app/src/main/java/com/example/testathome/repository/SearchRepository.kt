@@ -19,6 +19,7 @@ class SearchRepository(db:ItemDatabase) {
         dao.deleteItem(item)
     }
 
-    val getSavedItemList:LiveData<List<Item>> = dao.getSavedItem()
+//    val getSavedItemList:LiveData<List<Item>> = dao.getSavedItem()
+    fun getAll():LiveData<List<Item>> = dao.getSavedItem()
 
 }

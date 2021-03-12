@@ -24,14 +24,14 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         }
 
     }
-
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): HomeItemViewHolder {
-        return HomeItemViewHolder(HomeItemBinding.inflate(LayoutInflater.from(parent.context)))
+        val binding =HomeItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return HomeItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(
@@ -41,8 +41,8 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         val item = differ.currentList[position]
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { it(item) }
+            Log.d("holder : ",item.toString())
         }
-        Log.d("inonBindViewHolder: ",item.place_name)
         holder.bind(item)
 
     }
@@ -54,6 +54,7 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         fun bind(item:Item){
             binding.item=item
             binding.executePendingBindings() // binding에 필요한 모든 작업들 즉시 실행하도록 강제하는..?
+            Log.d("bind : ", item.place_name)
         }
 
     }

@@ -3,6 +3,7 @@ package com.example.testathome.ui.savedlist.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.testathome.models.Item
 import com.example.testathome.repository.SearchRepository
 import kotlinx.coroutines.CoroutineScope
@@ -15,19 +16,17 @@ class SearchViewModel(private val searchRepository: SearchRepository) : ViewMode
     val searchResult: LiveData<List<Item>>
         get() = _searchResults
 
-    fun getSearchItem(query: String,x:Double,y:Double){
-        CoroutineScope(Dispatchers.IO).launch {
-            val response = searchRepository.getSearchResult(query = query,x = x,y=y)
-            if(response.isSuccessful) {
-                _searchResults.postValue(response.body()?.documents)
-            }
+    //메인 쓰레드에서 실행(viewModelScope 는 메인쓰레드에서 돌아감 )
+    fun getSearchItem(query: String, x: Double, y: Double) = viewModelScope.launch {
+        val response = searchRepository.getSearchResult(query = query, x = x, y = y)
+        if (response.isSuccessful) {
+            _searchResults.postValue(response.body()?.documents)
         }
     }
 
-    fun saveItem(item: Item){
-        CoroutineScope(Dispatchers.IO).launch {
-            searchRepository.upsert(item)
-        }
+    fun saveItem(item: Item) =viewModelScope.launch {
+        searchRepository.upsert(item)
+
     }
 
 }

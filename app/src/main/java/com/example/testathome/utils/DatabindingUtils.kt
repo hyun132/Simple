@@ -22,10 +22,4 @@ object DatabindingUtils {
         }
         adapter.differ.submitList(items)
     }
-
-    @JvmStatic
-    @BindingAdapter("makeKeywordBold")
-    fun boldText(textView: TextView,text:String){
-        textView.setText(Html.fromHtml(text))
-    }
 }

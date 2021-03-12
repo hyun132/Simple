@@ -61,16 +61,20 @@ class SearchFragment(currentLocation: Location) : BottomSheetDialogFragment() {
             showAddDialog(it)
         }
 
-        binding.homeRecyclerview.adapter =adapter
-        binding.viewModel=viewModel
+//        binding.homeRecyclerview.adapter =adapter
+//        binding.viewModel=viewModel
+//        binding.homeRecyclerview.layoutManager = LinearLayoutManager(context)
+
+        binding.apply {
+            homeRecyclerview.adapter =adapter
+            viewModel=viewModel
+            homeRecyclerview.layoutManager = LinearLayoutManager(context)
+        }
 
         viewModel.searchResult.observe(viewLifecycleOwner){
             Log.d("main: ","data changed!")
             adapter.differ.submitList(it)
         }
-
-
-        binding.homeRecyclerview.layoutManager = LinearLayoutManager(context)
 
         binding.searchView.setOnQueryTextListener(object :androidx.appcompat.widget.SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {

@@ -20,4 +20,7 @@ interface Dao {
     @Query("select * from item_db")
     fun getSavedItem():LiveData<List<Item>>
 
+    @Query("Delete from item_db")
+    suspend fun deleteAll()
+
 }

@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,7 +34,7 @@ class SavedFragment : Fragment() {
     lateinit var adapter: HomeRecyclerviewAdapter
     lateinit var dialog: Dialog
     lateinit var anim:Animation
-
+    lateinit var viewModel : SavedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,20 +55,22 @@ class SavedFragment : Fragment() {
                     SavedViewModel(repository) as T
             }
         }
+//        val viewModel = SavedViewModel(repository)
         binding.viewModel = viewModel
         adapter = HomeRecyclerviewAdapter()
+        binding.savedRecyclerview.layoutManager= LinearLayoutManager(context)
+        binding.savedRecyclerview.adapter=adapter
 
-        initRecyclerview(viewModel)
+        initRecyclerview()
         searchDialogSetting()
 
-        viewModel.getSavedItems().observe(viewLifecycleOwner, {
+        viewModel.getSavedItems.observe(viewLifecycleOwner) {
             Log.d("main: ", "data changed!")
-            Log.d("main: ", it[0].toString())
             adapter.differ.submitList(it)
-        })
+        }
 
         binding.randomPickButton.setOnClickListener {
-            viewModel.getSavedItems().value?.let { it1 ->
+            viewModel.getSavedItems.value?.let { it1 ->
                 if (it1.size < 1) {
                     Toast.makeText(requireContext(), "목록을 추가해주세요!", Toast.LENGTH_SHORT).show()
                 } else {
@@ -85,11 +88,10 @@ class SavedFragment : Fragment() {
         }
     }
 
-    private fun initRecyclerview(viewModel: SavedViewModel) {
+    private fun initRecyclerview() {
 
-        binding.savedRecyclerview.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-        }
+
+
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 

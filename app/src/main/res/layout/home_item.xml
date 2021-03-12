@@ -14,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/main_pink4"
         app:layout_constraintBottom_toBottomOf="@+id/restaurnat_name_textview"
         app:layout_constraintTop_toBottomOf="@+id/restaurnat_name_textview">
 
@@ -68,14 +67,25 @@
             android:layout_marginTop="4dp" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="right"
+            android:text="@{item.distance}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_category"
-            android:text="@{item.distance}"
-            tools:text="100m"
+            tools:text="100m" />
+
+        <ImageView
+            android:id="@+id/iv_liked"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_gray_star"
             android:layout_marginTop="4dp"
-            android:gravity="right"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_category"
+            android:visibility="gone"/>
 
 
 

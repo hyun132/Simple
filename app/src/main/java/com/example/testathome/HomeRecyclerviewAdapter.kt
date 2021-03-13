@@ -1,13 +1,14 @@
 package com.example.testathome
 
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.toColor
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testathome.databinding.HomeItemBinding
+import com.example.testathome.databinding.SearchItemBinding
 import com.example.testathome.models.Item
 
 class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeItemViewHolder>() {
@@ -30,7 +31,7 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         parent: ViewGroup,
         viewType: Int
     ): HomeItemViewHolder {
-        val binding =HomeItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =SearchItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return HomeItemViewHolder(binding)
     }
 
@@ -41,7 +42,6 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
         val item = differ.currentList[position]
         holder.itemView.setOnClickListener {
             onItemClickListener?.let { it(item) }
-            Log.d("holder : ",item.toString())
         }
         holder.bind(item)
 
@@ -50,11 +50,21 @@ class HomeRecyclerviewAdapter:RecyclerView.Adapter<HomeRecyclerviewAdapter.HomeI
     override fun getItemCount(): Int = differ.currentList.size
 
 
-    class HomeItemViewHolder(private var binding:HomeItemBinding) :RecyclerView.ViewHolder(binding.root){
+    class HomeItemViewHolder(private var binding:SearchItemBinding) :RecyclerView.ViewHolder(binding.root){
         fun bind(item:Item){
             binding.item=item
             binding.executePendingBindings() // binding에 필요한 모든 작업들 즉시 실행하도록 강제하는..?
-            Log.d("bind : ", item.place_name)
+
+            //아이템 클릭했을 때 이 부분 어디로 빼야할지 고민..
+            binding.ivLiked.setOnClickListener {
+                if (item.liked){
+                    binding.ivLiked.setImageResource(R.drawable.ic_gray_star)
+                }else{
+                    binding.ivLiked.setImageResource(R.drawable.ic_yellow_star)
+                }
+                Log.d("star : ","clicked")
+                item.liked = !item.liked
+            }
         }
 
     }

@@ -47,47 +47,50 @@
             android:id="@+id/tv_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="@{item.category_group_name}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_liked"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_title"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="카테고리"
-            android:gravity="right"/>
+            android:layout_marginEnd="8dp"
+            tools:text="카테고리" />
 
         <TextView
             android:id="@+id/tv_address"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
+            app:layout_constraintHorizontal_weight="1"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:text="@{item.road_address_name}"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintStart_toEndOf="@+id/item_imageview"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
-            tools:text="주소"
-            android:text="@{item.road_address_name}"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp" />
+            tools:text="주소" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:gravity="right"
             android:text="@{item.distance}"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_liked"
             app:layout_constraintTop_toBottomOf="@+id/tv_category"
             tools:text="100m" />
 
+
         <ImageView
             android:id="@+id/iv_liked"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_gray_star"
-            android:layout_marginTop="4dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:liked_src="@{item.liked}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_category"
-            android:visibility="gone"/>
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

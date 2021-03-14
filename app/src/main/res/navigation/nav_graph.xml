@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/maps"
         android:name="com.example.testathome.ui.map.MapsFragment"
-        android:label="fragment_maps"
+        android:label="내 위치"
         tools:layout="@layout/fragment_maps">
         <action
             android:id="@+id/action_mapsFragment_to_searchFragment"
@@ -34,11 +34,11 @@
     <fragment
         android:id="@+id/saved"
         android:name="com.example.testathome.ui.savedlist.SavedFragment"
-        android:label="SavedFragment" />
+        android:label="나의 저장목록" />
     <fragment
         android:id="@+id/setting"
         android:name="com.example.testathome.ui.setting.SettingFragment"
-        android:label="fragment_thrid"
+        android:label="환경설정"
         tools:layout="@layout/fragment_setting" >
         <action
             android:id="@+id/action_setting_to_openLicenseFragment"
@@ -47,7 +47,7 @@
     <fragment
         android:id="@+id/openLicenseFragment"
         android:name="com.example.testathome.ui.setting.OpenLicenseFragment"
-        android:label="fragment_open_license"
+        android:label="오픈소스 라이선스"
         tools:layout="@layout/fragment_open_license" >
         <action
             android:id="@+id/action_openLicenseFragment_to_setting"

@@ -10,6 +10,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MapsViewModel(private val searchRepository: SearchRepository) : ViewModel() {
+class MapsViewModel() : ViewModel() {
 
 }

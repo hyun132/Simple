@@ -25,10 +25,11 @@ import com.example.testathome.R
 import com.example.testathome.databinding.FragmentSavedBinding
 import com.example.testathome.db.ItemDatabase
 import com.example.testathome.repository.SearchRepository
+import com.example.testathome.ui.BaseFragment
 import com.example.testathome.ui.savedlist.search.SearchViewModel
 import kotlin.random.Random
 
-class SavedFragment : Fragment() {
+class SavedFragment : BaseFragment() {
 
     lateinit var binding: FragmentSavedBinding
     lateinit var adapter: HomeRecyclerviewAdapter
@@ -36,30 +37,30 @@ class SavedFragment : Fragment() {
     lateinit var anim:Animation
     lateinit var viewModel : SavedViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val savedViewModel: SavedViewModel by viewModels()
+        viewModel=savedViewModel
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val db = ItemDatabase.getDatabase(requireContext())
-        val repository=SearchRepository(db)
-        val viewModel: SavedViewModel by viewModels {
-            object : ViewModelProvider.Factory {
-                override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-                    SavedViewModel(repository) as T
-            }
-        }
 //        val viewModel = SavedViewModel(repository)
-        binding.viewModel = viewModel
         adapter = HomeRecyclerviewAdapter()
-        binding.savedRecyclerview.layoutManager= LinearLayoutManager(context)
-        binding.savedRecyclerview.adapter=adapter
+        binding.apply {
+            viewModel = viewModel
+            savedRecyclerview.layoutManager= LinearLayoutManager(context)
+            savedRecyclerview.adapter=adapter
+        }
 
         initRecyclerview()
         searchDialogSetting()
@@ -89,10 +90,6 @@ class SavedFragment : Fragment() {
     }
 
     private fun initRecyclerview() {
-
-
-
-
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
 
             override fun onMove(
@@ -114,8 +111,6 @@ class SavedFragment : Fragment() {
 
     private fun searchDialogSetting() {
         dialog = Dialog(requireContext())
-//        dialog.setContentView(R.layout.fragment_dialog)
-//        dialog.window?.setLayout(700, 700)
         dialog.apply {
             setContentView(R.layout.fragment_dialog)
             window?.setLayout(700, 700)
@@ -129,10 +124,6 @@ class SavedFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-//        viewModel.savedItems
-    }
 }
 
 

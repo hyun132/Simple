@@ -13,7 +13,6 @@ data class Item(
     val category_group_code: String,
     val category_group_name: String,
     val category_name: String,
-    var distance: String,
     @PrimaryKey val id: String,
     val phone: String,
     val place_name: String,
@@ -21,5 +20,7 @@ data class Item(
     val road_address_name: String,
     val x: String,
     val y: String,
-    var liked:Boolean=false
-):Serializable
+    var liked: Boolean = false
+) : Serializable {
+    @Ignore var distance: String? = null
+}

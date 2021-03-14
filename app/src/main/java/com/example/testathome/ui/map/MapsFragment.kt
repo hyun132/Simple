@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.example.testathome.R
 import com.example.testathome.databinding.FragmentMapsBinding
 import com.example.testathome.models.Item
+import com.example.testathome.ui.BaseFragment
 import com.example.testathome.ui.savedlist.search.SearchFragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,7 +25,7 @@ import com.google.android.gms.maps.model.LatLng
 
 
 @SuppressLint("MissingPermission")
-class MapsFragment : Fragment(), GoogleMap.OnMyLocationClickListener,
+class MapsFragment : BaseFragment(), GoogleMap.OnMyLocationClickListener,
     GoogleMap.OnMyLocationButtonClickListener {
 
     lateinit var currentLocation: Location

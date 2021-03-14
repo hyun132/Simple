@@ -10,8 +10,6 @@ import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
 import com.example.testathome.models.Item
 
-
-// null값 처리 어떻게할건지 ?
 object DatabindingUtils {
     @JvmStatic
     @BindingAdapter("listItem")

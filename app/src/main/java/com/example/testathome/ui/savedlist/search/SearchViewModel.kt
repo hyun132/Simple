@@ -1,16 +1,22 @@
 package com.example.testathome.ui.savedlist.search
 
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.testathome.MyApplication
+import com.example.testathome.db.ItemDatabase
 import com.example.testathome.models.Item
 import com.example.testathome.repository.SearchRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class SearchViewModel(private val searchRepository: SearchRepository) : ViewModel() {
+class SearchViewModel : ViewModel() {
+
+    val db = ItemDatabase.getDatabase()
+    private val searchRepository=SearchRepository(db)
 
     private val _searchResults: MutableLiveData<List<Item>> = MutableLiveData()
     val searchResult: LiveData<List<Item>>

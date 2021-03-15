@@ -15,6 +15,10 @@ class SearchRepository(db:ItemDatabase) {
         dao.upsert(item)
     }
 
+    suspend fun update(item:Item){
+        dao.update(item)
+    }
+
     suspend fun delete(item: Item){
         dao.deleteItem(item)
     }

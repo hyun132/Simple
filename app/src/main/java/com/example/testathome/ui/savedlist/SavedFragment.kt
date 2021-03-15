@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -24,6 +25,7 @@ import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
 import com.example.testathome.databinding.FragmentSavedBinding
 import com.example.testathome.db.ItemDatabase
+import com.example.testathome.models.Item
 import com.example.testathome.repository.SearchRepository
 import com.example.testathome.ui.BaseFragment
 import com.example.testathome.ui.savedlist.search.SearchViewModel
@@ -56,6 +58,19 @@ class SavedFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 //        val viewModel = SavedViewModel(repository)
         adapter = HomeRecyclerviewAdapter()
+        adapter.likedClick = object :HomeRecyclerviewAdapter.LikedClick{
+            override fun onClick(view: View, _item: Item) {
+                var item =_item
+                if (item.liked){
+                    view.findViewById<ImageView>(R.id.iv_liked).setImageResource(R.drawable.ic_gray_star)
+                }else{
+                    view.findViewById<ImageView>(R.id.iv_liked).setImageResource(R.drawable.ic_yellow_star)
+                }
+                item.liked=!item.liked
+                viewModel.updateItem(item)
+            }
+
+        }
         binding.apply {
             viewModel = viewModel
             savedRecyclerview.layoutManager= LinearLayoutManager(context)

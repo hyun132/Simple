@@ -20,6 +20,10 @@ class SavedViewModel : ViewModel() {
         searchRepository.delete(item)
     }
 
+    fun updateItem(item: Item) = viewModelScope.launch {
+        searchRepository.update(item)
+    }
+
     var getSavedItems = searchRepository.getAll()
 
 }

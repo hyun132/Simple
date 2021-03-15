@@ -1,11 +1,8 @@
 package com.example.testathome.db
 
 import androidx.lifecycle.LiveData
+import androidx.room.*
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.example.testathome.models.Item
 
 @Dao
@@ -22,5 +19,8 @@ interface Dao {
 
     @Query("Delete from item_db")
     suspend fun deleteAll()
+
+    @Update
+    suspend fun update(item: Item)
 
 }

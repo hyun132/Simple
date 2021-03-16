@@ -16,11 +16,11 @@ class SavedViewModel : ViewModel() {
     val db = ItemDatabase.getDatabase()
     private val searchRepository=SearchRepository(db)
 
-    fun deleteItem(item: Item) = viewModelScope.launch {
+    fun deleteItem(item: Item) = viewModelScope.launch(Dispatchers.IO) {
         searchRepository.delete(item)
     }
 
-    fun updateItem(item: Item) = viewModelScope.launch {
+    fun updateItem(item: Item) = viewModelScope.launch(Dispatchers.IO) {
         searchRepository.update(item)
     }
 

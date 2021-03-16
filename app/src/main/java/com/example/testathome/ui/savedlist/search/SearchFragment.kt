@@ -21,14 +21,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class SearchFragment(currentLocation: Location) : BottomSheetDialogFragment() {
 
-    lateinit var viewModel: SearchViewModel
     lateinit var binding:FragmentSearchBinding
     var currentLocation =LatLng(currentLocation.latitude,currentLocation.longitude)
+    val viewModel: SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val searchViewModel: SearchViewModel by viewModels()
-        viewModel = searchViewModel
+
         setStyle(STYLE_NORMAL,R.style.CustomBottomSheetDialogTheme)
     }
 

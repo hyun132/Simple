@@ -37,13 +37,10 @@ class SavedFragment : BaseFragment() {
     lateinit var adapter: HomeRecyclerviewAdapter
     lateinit var dialog: Dialog
     lateinit var anim:Animation
-    lateinit var savedViewModel : SavedViewModel
-
+    private val savedViewModel: SavedViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val _savedViewModel: SavedViewModel by viewModels()
-        savedViewModel=_savedViewModel
     }
 
     override fun onCreateView(

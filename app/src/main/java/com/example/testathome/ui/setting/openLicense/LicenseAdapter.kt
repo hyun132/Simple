@@ -1,7 +1,6 @@
-package com.example.testathome.ui.setting
+package com.example.testathome.ui.setting.openLicense
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testathome.databinding.LicenseItemBinding
@@ -18,12 +17,12 @@ class LicenseAdapter(_items:ArrayList<OpenLicenseFragment.LicenseData>):Recycler
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): LicenseAdapter.LicenseViewHolder {
+    ): LicenseViewHolder {
         val binding = LicenseItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return LicenseViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: LicenseAdapter.LicenseViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: LicenseViewHolder, position: Int) {
         holder.bind(itemList[position])
     }
 

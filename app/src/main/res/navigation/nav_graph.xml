@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/openLicenseFragment"
-        android:name="com.example.testathome.ui.setting.OpenLicenseFragment"
+        android:name="com.example.testathome.ui.setting.openLicense.OpenLicenseFragment"
         android:label="오픈소스 라이선스"
         tools:layout="@layout/fragment_open_license" >
         <action

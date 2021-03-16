@@ -37,13 +37,13 @@ class SavedFragment : BaseFragment() {
     lateinit var adapter: HomeRecyclerviewAdapter
     lateinit var dialog: Dialog
     lateinit var anim:Animation
-    lateinit var viewModel : SavedViewModel
+    lateinit var savedViewModel : SavedViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val savedViewModel: SavedViewModel by viewModels()
-        viewModel=savedViewModel
+        val _savedViewModel: SavedViewModel by viewModels()
+        savedViewModel=_savedViewModel
     }
 
     override fun onCreateView(
@@ -67,26 +67,27 @@ class SavedFragment : BaseFragment() {
                     view.findViewById<ImageView>(R.id.iv_liked).setImageResource(R.drawable.ic_yellow_star)
                 }
                 item.liked=!item.liked
-                viewModel.updateItem(item)
+                savedViewModel.updateItem(item)
             }
 
-        }
-        binding.apply {
-            viewModel = viewModel
-            savedRecyclerview.layoutManager= LinearLayoutManager(context)
-            savedRecyclerview.adapter=adapter
         }
 
         initRecyclerview()
         searchDialogSetting()
 
-        viewModel.getSavedItems.observe(viewLifecycleOwner) {
+        savedViewModel.getSavedItems.observe(viewLifecycleOwner) {
             Log.d("main: ", "data changed!")
             adapter.differ.submitList(it)
+            if(it.size<1) binding.emptyListBackground.visibility=View.VISIBLE
+            else binding.emptyListBackground.visibility=View.GONE
         }
-
+        binding.apply {
+            viewModel = savedViewModel
+            savedRecyclerview.layoutManager= LinearLayoutManager(context)
+            savedRecyclerview.adapter=adapter
+        }
         binding.randomPickButton.setOnClickListener {
-            viewModel.getSavedItems.value?.let { it1 ->
+            savedViewModel.getSavedItems.value?.let { it1 ->
                 if (it1.size < 1) {
                     Toast.makeText(requireContext(), "목록을 추가해주세요!", Toast.LENGTH_SHORT).show()
                 } else {
@@ -116,7 +117,7 @@ class SavedFragment : BaseFragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                viewModel.deleteItem(adapter.differ.currentList[viewHolder.adapterPosition])
+                savedViewModel.deleteItem(adapter.differ.currentList[viewHolder.adapterPosition])
                 Log.d("onSwiped : ", "item swiped!")
             }
 

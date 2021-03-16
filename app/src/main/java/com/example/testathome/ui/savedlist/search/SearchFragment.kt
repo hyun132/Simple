@@ -1,6 +1,5 @@
 package com.example.testathome.ui.savedlist.search
 
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.location.Location
@@ -15,10 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testathome.HomeRecyclerviewAdapter
 import com.example.testathome.R
 import com.example.testathome.databinding.FragmentSearchBinding
-import com.example.testathome.db.ItemDatabase
 import com.example.testathome.models.Item
-import com.example.testathome.repository.SearchRepository
-import com.example.testathome.ui.BaseFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -101,7 +97,7 @@ class SearchFragment(currentLocation: Location) : BottomSheetDialogFragment() {
             val params = parent.layoutParams as CoordinatorLayout.LayoutParams
             val behavior = params.behavior
             val bottomSheetBehavior = behavior as BottomSheetBehavior<*>?
-            bottomSheetBehavior!!.peekHeight = view!!.measuredHeight-binding.searchToolbar.height
+            bottomSheetBehavior!!.peekHeight = view.measuredHeight-binding.searchToolbar.height
             parent.setBackgroundColor(Color.TRANSPARENT)
         }
 

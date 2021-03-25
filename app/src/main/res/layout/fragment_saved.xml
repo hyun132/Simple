@@ -16,48 +16,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.savedlist.SavedFragment">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/empty_list_background"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-           app:layout_constraintBottom_toTopOf="@+id/random_pick_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_weight="1">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/empty_image"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="저장된 목록이 없어요.\n위시리스트를 추가해보세요!"
-                android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/saved_recyclerview"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:visibility="@{viewModel.getSavedItems.size() == 0 ? View.INVISIBLE:View.VISIBLE}"
             app:layout_constraintVertical_weight="1"
             app:layout_constraintBottom_toTopOf="@+id/random_pick_button"
             android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <include layout="@layout/no_list_background"
+            android:id="@+id/empty_list_background"
+            app:layout_constraintBottom_toBottomOf="@id/saved_recyclerview"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/random_pick_button"

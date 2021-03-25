@@ -18,7 +18,7 @@ class SettingViewModel : ViewModel() {
     val db = ItemDatabase.getDatabase()
     val searchRepository = SearchRepository(db)
 
-    fun deleteAll() = viewModelScope.launch {
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
         searchRepository.deleteAll()
     }
 

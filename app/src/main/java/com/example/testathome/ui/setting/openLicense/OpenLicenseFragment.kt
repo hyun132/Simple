@@ -1,20 +1,15 @@
-package com.example.testathome.ui.setting
+package com.example.testathome.ui.setting.openLicense
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testathome.R
 import com.example.testathome.databinding.FragmentOpenLicenseBinding
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.io.IOException
 import java.io.InputStream
 

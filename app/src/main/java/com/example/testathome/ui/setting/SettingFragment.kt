@@ -30,13 +30,10 @@ import java.io.InputStream
 
 class SettingFragment : BaseFragment() {
 
-    lateinit var viewModel : SettingViewModel
+    val viewModel: SettingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val settingViewModel: SettingViewModel by viewModels()
-        viewModel=settingViewModel
     }
 
     override fun onCreateView(
